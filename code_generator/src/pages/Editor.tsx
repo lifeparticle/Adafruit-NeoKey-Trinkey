@@ -7,11 +7,12 @@ import {
 	Space,
 	TextInput,
 } from "@mantine/core";
-import { useEffect, useState } from "react";
-import { arrayKey, tuppleKey, useKeyPress } from "utils/utils";
+import { useState } from "react";
+import { useKeyPress } from "utils/utils";
 
 const Editor: React.FC = () => {
 	const [focused, setFocused] = useState(false);
+	console.log(focused);
 	const [value, setValue] = useState("");
 	const [code] = useKeyPress();
 	return (
