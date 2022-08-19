@@ -34,10 +34,11 @@ key_output = (
    {'keys': (Keycode.COMMAND, Keycode.SPACEBAR), 'delay': 0.1},
    {'keys': "chrome\n", 'delay': 1},  # give it a moment to launch!
    {'keys': (Keycode.COMMAND, Keycode.T), 'delay': 0.1},
-   {'keys': "https://github.com/lifeparticle", 'delay': 0.1},
+   {'keys': "your_zoom_meeting_url", 'delay': 0.1},
    {'keys': Keycode.ENTER, 'delay': 0.1},
+   {'keys': Keycode.TAB, 'delay': 0.5},
+   {'keys': [Keycode.TAB, Keycode.TAB, Keycode.TAB, Keycode.TAB, Keycode.TAB, Keycode.TAB, Keycode.TAB, Keycode.ENTER], 'delay': 0.1},
 )
-
 
 # our helper function will press the keys themselves
 def make_keystrokes(keys, delay):
@@ -63,7 +64,11 @@ while True:
         print("Button released.")
         if isinstance(key_output, (list, tuple)) and isinstance(key_output[0], dict):
             for k in key_output:
-                make_keystrokes(k['keys'], k['delay'])
+                if isinstance(k['keys'], list):
+                    for i in k['keys']:
+                        make_keystrokes(i, k['delay'])
+                else:
+                     make_keystrokes(k['keys'], k['delay'])
         else:
             make_keystrokes(key_output, delay=0)
         button_state = False

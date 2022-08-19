@@ -38,7 +38,6 @@ key_output = (
    {'keys': Keycode.ENTER, 'delay': 0.1},
 )
 
-
 # our helper function will press the keys themselves
 def make_keystrokes(keys, delay):
     if isinstance(keys, str):  # If it's a string...

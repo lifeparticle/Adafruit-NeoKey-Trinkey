@@ -32,12 +32,11 @@ touch_state = False
 # print a string on keypress
 key_output = (
    {'keys': (Keycode.COMMAND, Keycode.SPACEBAR), 'delay': 0.1},
-   {'keys': "chrome\n", 'delay': 1},  # give it a moment to launch!
-   {'keys': (Keycode.COMMAND, Keycode.T), 'delay': 0.1},
-   {'keys': "https://github.com/lifeparticle", 'delay': 0.1},
+   {'keys': "iterm\n", 'delay': 1},  # give it a moment to launch!
+   {'keys': "cd path_to_your_shell_script", 'delay': 0.1},
+   {'keys': "./neokey_trinkey_script.sh", 'delay': 0.1},
    {'keys': Keycode.ENTER, 'delay': 0.1},
 )
-
 
 # our helper function will press the keys themselves
 def make_keystrokes(keys, delay):
