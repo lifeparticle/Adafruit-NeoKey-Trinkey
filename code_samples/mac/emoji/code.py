@@ -1,3 +1,5 @@
+# https://github.com/adafruit/Adafruit_Learning_System_Guides/blob/main/NeoKey_Trinkey/CircuitPython_HID_Cap_Touch_Example/code.py
+
 import time
 import board
 import neopixel
@@ -10,35 +12,41 @@ import touchio
 
 print("NeoKey Trinkey HID")
 
+# create the pixel and turn it off
 pixel = neopixel.NeoPixel(board.NEOPIXEL, 1, brightness=0.1)
 pixel.fill(0x0)
 
-time.sleep(1)
+time.sleep(1)  # Sleep for a bit to avoid a race condition on some systems
 keyboard = Keyboard(usb_hid.devices)
-keyboard_layout = KeyboardLayoutUS(keyboard)
+keyboard_layout = KeyboardLayoutUS(keyboard)  # We're in the US :)
 
+# create the switch, add a pullup, start it with not being pressed
 button = DigitalInOut(board.SWITCH)
 button.switch_to_input(pull=Pull.DOWN)
 button_state = False
 
+# create the captouch element and start it with not touched
 touch = touchio.TouchIn(board.TOUCH)
 touch_state = False
 
+# print a string on keypress
 key_output = (
    {'keys': (Keycode.CONTROL, Keycode.COMMAND, Keycode.SPACEBAR), 'delay': 0.2},
    {'keys': "coffee\n", 'delay': 0.5},
    {'keys': [Keycode.DOWN_ARROW, Keycode.ENTER], 'delay': 0.05},
 )
 
+
+# our helper function will press the keys themselves
 def make_keystrokes(keys, delay):
-    if isinstance(keys, str):
-        keyboard_layout.write(keys)
-    elif isinstance(keys, int):
-        keyboard.press(keys)
-        keyboard.release_all()
-    elif isinstance(keys, (list, tuple)):
-        keyboard.press(*keys)
-        keyboard.release_all()
+    if isinstance(keys, str):  # If it's a string...
+        keyboard_layout.write(keys)  # ...Print the string
+    elif isinstance(keys, int):  # If its a single key
+        keyboard.press(keys)  # "Press"...
+        keyboard.release_all()  # ..."Release"!
+    elif isinstance(keys, (list, tuple)):  # If its multiple keys
+        keyboard.press(*keys)  # "Press"...
+        keyboard.release_all()  # ..."Release"!
     time.sleep(delay)
 
 while True:
