@@ -34,6 +34,7 @@ key_output = (
    {'keys': (Keycode.COMMAND, Keycode.SPACEBAR), 'delay': 0.1},
    {'keys': "iterm\n", 'delay': 1},  # give it a moment to launch!
    {'keys': "cd path_to_your_shell_script", 'delay': 0.1},
+   {'keys': Keycode.ENTER, 'delay': 0.1},
    {'keys': "./neokey_trinkey_script.sh", 'delay': 0.1},
    {'keys': Keycode.ENTER, 'delay': 0.1},
 )
