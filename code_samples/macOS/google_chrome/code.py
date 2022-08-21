@@ -62,7 +62,11 @@ while True:
         print("Button released.")
         if isinstance(key_output, (list, tuple)) and isinstance(key_output[0], dict):
             for k in key_output:
-                make_keystrokes(k['keys'], k['delay'])
+                if isinstance(k['keys'], list):
+                    for i in k['keys']:
+                        make_keystrokes(i, k['delay'])
+                else:
+                     make_keystrokes(k['keys'], k['delay'])
         else:
             make_keystrokes(key_output, delay=0)
         button_state = False
